@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Identity Hub - Prototyp</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="screen active">
+        <div class="login-container">
+            <div class="logo-section">
+                <div class="logo">DIH</div>
+                <h1>Digital Identity Hub</h1>
+                <p class="subtitle">Zarządzaj swoją tożsamością cyfrową z jednego miejsca</p>
+            </div>
+            
+            <form class="login-form">
+                <div class="form-group">
+                    <label for="email">Adres e-mail</label>
+                    <input type="email" id="email" placeholder="twoj@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Hasło</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Zapamiętaj mnie</label>
+                </div>
+                
+                <button type="button" class="btn btn-primary" onclick="goToDashboard()">Zaloguj się</button>
+            </form>
+            
+            <div class="form-divider">LUB</div>
+            
+            <button type="button" class="btn btn-secondary" onclick="goToRegister()">Utwórz nowe konto</button>
+            
+            <p class="forgot-password"><a href="#" onclick="event.preventDefault()">Zapomniałeś hasła?</a></p>
+        </div>
+    </div>
+
+    <!-- Register Screen -->
+    <div id="registerScreen" class="screen">
+        <div class="register-container">
+            <button class="btn-back" onclick="goToLogin()">← Wróć</button>
+            
+            <h1>Utwórz konto w Digital Identity Hub</h1>
+            
+            <form class="register-form">
+                <div class="form-group">
+                    <label for="reg-name">Imię i nazwisko</label>
+                    <input type="text" id="reg-name" placeholder="Jan Kowalski" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg-email">Adres e-mail</label>
+                    <input type="email" id="reg-email" placeholder="twoj@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg-password">Hasło</label>
+                    <input type="password" id="reg-password" placeholder="Min. 12 znaków" required>
+                    <div class="password-requirements">
+                        <small>✓ Min. 12 znaków</small>
+                        <small>✓ Duże i małe litery</small>
+                        <small>✓ Liczby i znaki specjalne</small>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg-confirm">Potwierdź hasło</label>
+                    <input type="password" id="reg-confirm" placeholder="Powtórz hasło" required>
+                </div>
+                
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">Akceptuję <a href="#">Regulamin</a> i <a href="#">Politykę prywatności</a></label>
+                </div>
+                
+                <button type="button" class="btn btn-primary" onclick="completeRegister()">Rejestracja</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="dashboardScreen" class="screen">
+        <div class="app-container">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <div class="logo-small">DIH</div>
+                    <span>Digital Identity Hub</span>
+                </div>
+                <div class="header-right">
+                    <button class="notification-btn" onclick="toggleNotifications()">
+                        🔔
+                        <span class="notification-badge">2</span>
+                    </button>
+                    <button class="profile-btn" onclick="toggleProfileMenu()">👤</button>
+                    <div id="profileMenu" class="profile-dropdown">
+                        <a href="#" onclick="goToProfile()">Profil</a>
+                        <a href="#" onclick="goToSettings()">Ustawienia</a>
+                        <hr>
+                        <a href="#" onclick="goToLogin()">Wyloguj się</a>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="dashboard-main">
+                <!-- Welcome Section -->
+                <div class="welcome-section">
+                    <h1>Witaj, Jan!</h1>
+                    <p>Oto podsumowanie Twojej tożsamości cyfrowej</p>
+                </div>
+
+                <!-- Security Score Card -->
+                <div class="security-card">
+                    <div class="security-header">
+                        <h2>Wskaźnik bezpieczeństwa</h2>
+                        <span class="security-score">95/100</span>
+                    </div>
+                    <div class="security-bar">
+                        <div class="security-fill" style="width: 95%"></div>
+                    </div>
+                    <div class="security-details">
+                        <div class="detail-item">
+                            <span class="status-good">✓</span>
+                            <span>MFA włączony na 12/12 kontach</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="status-good">✓</span>
+                            <span>Ostatnia weryfikacja: dziś, 10:23</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="status-warning">⚠</span>
+                            <span>Jedno hasło wciąż słabe</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3>Szybkie akcje</h3>
+                    <div class="actions-grid">
+                        <button class="action-card" onclick="goToIdentityManager()">
+                            <div class="action-icon">🔐</div>
+                            <div class="action-title">Zarządzaj tożsamościami</div>
+                            <div class="action-desc">Połączone konta (12)</div>
+                        </button>
+                        <button class="action-card" onclick="goToSecurityCenter()">
+                            <div class="action-icon">🛡️</div>
+                            <div class="action-title">Centrum bezpieczeństwa</div>
+                            <div class="action-desc">Alerty i zagrożenia</div>
+                        </button>
+                        <button class="action-card" onclick="goToIdentityManager('temporary')">
+                            <div class="action-icon">👥</div>
+                            <div class="action-title">Tożsamości tymczasowe</div>
+                            <div class="action-desc">Nowe profile (2)</div>
+                        </button>
+                        <button class="action-card" onclick="goToConsentManager()">
+                            <div class="action-icon">✅</div>
+                            <div class="action-title">Zgody i cookies</div>
+                            <div class="action-desc">Zarządzaj preferencjami</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Connected Services -->
+                <div class="connected-services">
+                    <h3>Ostatnio zalogowane</h3>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <div class="service-icon">G</div>
+                            <div class="service-info">
+                                <div class="service-name">Google</div>
+                                <div class="service-date">Dzisiaj o 14:32</div>
+                            </div>
+                            <div class="service-status online">● Online</div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon">M</div>
+                            <div class="service-info">
+                                <div class="service-name">Microsoft</div>
+                                <div class="service-date">Wczoraj o 10:15</div>
+                            </div>
+                            <div class="service-status online">● Online</div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon">G</div>
+                            <div class="service-info">
+                                <div class="service-name">GitHub</div>
+                                <div class="service-date">2 dni temu</div>
+                            </div>
+                            <div class="service-status offline">● Offline</div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" onclick="goToDashboard()">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Panel</span>
+            </button>
+            <button class="nav-item" onclick="goToIdentityManager()">
+                <span class="nav-icon">🔐</span>
+                <span class="nav-label">Tożsamości</span>
+            </button>
+            <button class="nav-item" onclick="goToSecurityCenter()">
+                <span class="nav-icon">🛡️</span>
+                <span class="nav-label">Bezpieczeństwo</span>
+            </button>
+            <button class="nav-item" onclick="goToSettings()">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-label">Ustawienia</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Identity Manager Screen -->
+    <div id="identityManagerScreen" class="screen">
+        <div class="app-container">
+            <header class="top-header">
+                <button class="btn-back" onclick="goToDashboard()">← Panel</button>
+                <h2>Menedżer Tożsamości</h2>
+                <div></div>
+            </header>
+
+            <main class="manager-main">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchIdentityTab('connected')">Połączone konta</button>
+                    <button class="tab-btn" onclick="switchIdentityTab('temporary')">Tożsamości tymczasowe</button>
+                </div>
+
+                <!-- Connected Accounts Tab -->
+                <div id="connectedTab" class="tab-content active">
+                    <div class="accounts-list">
+                        <div class="account-card">
+                            <div class="account-header">
+                                <div class="account-icon">🔐</div>
+                                <div class="account-info">
+                                    <h4>Gmail</h4>
+                                    <p>jan@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="account-stats">
+                                <span class="stat">MFA: ✓</span>
+                                <span class="stat">Ostatni: dziś</span>
+                            </div>
+                            <button class="btn btn-small" onclick="manageAccount()">Zarządzaj</button>
+                        </div>
+
+                        <div class="account-card">
+                            <div class="account-header">
+                                <div class="account-icon">💼</div>
+                                <div class="account-info">
+                                    <h4>LinkedIn</h4>
+                                    <p>jan.kowalski@linkedin.com</p>
+                                </div>
+                            </div>
+                            <div class="account-stats">
+                                <span class="stat">MFA: ✓</span>
+                                <span class="stat">Ostatni: 2 dni</span>
+                            </div>
+                            <button class="btn btn-small" onclick="manageAccount()">Zarządzaj</button>
+                        </div>
+
+                        <div class="account-card">
+                            <div class="account-header">
+                                <div class="account-icon">🏦</div>
+                                <div class="account-info">
+                                    <h4>PKO BP</h4>
+                                    <p>jan@pko.pl</p>
+                                </div>
+                            </div>
+                            <div class="account-stats">
+                                <span class="stat">MFA: ✓</span>
+                                <span class="stat">Ostatni: 5 dni</span>
+                            </div>
+                            <button class="btn btn-small" onclick="manageAccount()">Zarządzaj</button>
+                        </div>
+
+                        <div class="account-card">
+                            <div class="account-header">
+                                <div class="account-icon">🎵</div>
+                                <div class="account-info">
+                                    <h4>Spotify</h4>
+                                    <p>jan@spotify.com</p>
+                                </div>
+                            </div>
+                            <div class="account-stats">
+                                <span class="stat">MFA: ✗</span>
+                                <span class="stat">Ostatni: 7 dni</span>
+                            </div>
+                            <button class="btn btn-small" onclick="manageMFA()">Włącz MFA</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Temporary Identities Tab -->
+                <div id="temporaryTab" class="tab-content">
+                    <div class="temporary-header">
+                        <p>Tworz tymczasowe profile do testowania nowych usług bez ujawniania swoich danych.</p>
+                        <button class="btn btn-primary" onclick="createTemporaryIdentity()">+ Utwórz nowy profil</button>
+                    </div>
+                    
+                    <div class="accounts-list">
+                        <div class="account-card temporary">
+                            <div class="account-header">
+                                <div class="account-icon-temp">👥</div>
+                                <div class="account-info">
+                                    <h4>Test_Profile_2024</h4>
+                                    <p>test.user.1234@temp.dih.io</p>
+                                </div>
+                            </div>
+                            <div class="account-stats">
+                                <span class="stat temp">Wygasa: 14 dni</span>
+                                <span class="stat temp">Nowe</span>
+                            </div>
+                            <button class="btn btn-small" onclick="useTemporaryProfile()">Użyj</button>
+                        </div>
+
+                        <div class="account-card temporary">
+                            <div class="account-header">
+                                <div class="account-icon-temp">👥</div>
+                                <div class="account-info">
+                                    <h4>Temp_Shop_2024</h4>
+                                    <p>temp.shop.5678@temp.dih.io</p>
+                                </div>
+                            </div>
+                            <div class="account-stats">
+                                <span class="stat temp">Wygasa: 7 dni</span>
+                                <span class="stat temp">Aktywna</span>
+                            </div>
+                            <button class="btn btn-small" onclick="useTemporaryProfile()">Konwertuj</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <nav class="bottom-nav">
+            <button class="nav-item" onclick="goToDashboard()">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Panel</span>
+            </button>
+            <button class="nav-item active" onclick="goToIdentityManager()">
+                <span class="nav-icon">🔐</span>
+                <span class="nav-label">Tożsamości</span>
+            </button>
+            <button class="nav-item" onclick="goToSecurityCenter()">
+                <span class="nav-icon">🛡️</span>
+                <span class="nav-label">Bezpieczeństwo</span>
+            </button>
+            <button class="nav-item" onclick="goToSettings()">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-label">Ustawienia</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Security Center Screen -->
+    <div id="securityCenterScreen" class="screen">
+        <div class="app-container">
+            <header class="top-header">
+                <button class="btn-back" onclick="goToDashboard()">← Panel</button>
+                <h2>Centrum Bezpieczeństwa</h2>
+                <div></div>
+            </header>
+
+            <main class="security-main">
+                <!-- Critical Alert -->
+                <div class="alert alert-danger">
+                    <div class="alert-header">
+                        <span class="alert-icon">⚠️</span>
+                        <div class="alert-content">
+                            <h4>Logowanie z nieznanej lokalizacji</h4>
+                            <p>Wykryliśmy próbę logowania z Moskwy (RU) o 23:45 dziś</p>
+                        </div>
+                    </div>
+                    <div class="alert-actions">
+                        <button class="btn btn-small btn-danger" onclick="blockAccess()">Zablokuj dostęp</button>
+                        <button class="btn btn-small" onclick="verifyAction()">To byłem ja</button>
+                    </div>
+                </div>
+
+                <!-- Warning Alert -->
+                <div class="alert alert-warning">
+                    <div class="alert-header">
+                        <span class="alert-icon">⚠</span>
+                        <div class="alert-content">
+                            <h4>Słabe hasło na jednym koncie</h4>
+                            <p>Konto Spotify używa hasła ze słabą siłą</p>
+                        </div>
+                    </div>
+                    <div class="alert-actions">
+                        <button class="btn btn-small" onclick="fixPassword()">Napraw hasło</button>
+                    </div>
+                </div>
+
+                <!-- Safe Alert -->
+                <div class="alert alert-success">
+                    <div class="alert-header">
+                        <span class="alert-icon">✓</span>
+                        <div class="alert-content">
+                            <h4>Brak anomalii</h4>
+                            <p>Wszystkie konta są zabezpieczone prawidłowo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Check Section -->
+                <div class="security-checks">
+                    <h3>Kontrole bezpieczeństwa</h3>
+                    
+                    <div class="check-item">
+                        <div class="check-status good">✓</div>
+                        <div class="check-info">
+                            <h5>Weryfikacja dwuskładnikowa</h5>
+                            <p>Włączona na 11/12 kontach</p>
+                        </div>
+                    </div>
+
+                    <div class="check-item">
+                        <div class="check-status warning">⚠</div>
+                        <div class="check-info">
+                            <h5>Monitorowanie wycieków danych</h5>
+                            <p>1 konto potencjalnie narażone - wymaga działania</p>
+                        </div>
+                        <button class="btn btn-small" onclick="reviewBreach()">Przejrzyj</button>
+                    </div>
+
+                    <div class="check-item">
+                        <div class="check-status good">✓</div>
+                        <div class="check-info">
+                            <h5>Ostatnia weryfikacja biometryczna</h5>
+                            <p>Dzisiaj o 10:23</p>
+                        </div>
+                    </div>
+
+                    <div class="check-item">
+                        <div class="check-status good">✓</div>
+                        <div class="check-info">
+                            <h5>Historia logowań</h5>
+                            <p>Brak podejrzanych aktywności w ciągu ostatnich 30 dni</p>
+                        </div>
+                        <button class="btn btn-small" onclick="viewLoginHistory()">Historia</button>
+                    </div>
+                </div>
+
+                <!-- Premium Support -->
+                <div class="premium-section">
+                    <h3>🌟 Wsparcie Premium</h3>
+                    <p>Porozmawiaj z naszymi ekspertami ds. bezpieczeństwa</p>
+                    <button class="btn btn-primary" onclick="contactSupport()">Skontaktuj się z ekspertem</button>
+                </div>
+            </main>
+        </div>
+
+        <nav class="bottom-nav">
+            <button class="nav-item" onclick="goToDashboard()">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Panel</span>
+            </button>
+            <button class="nav-item" onclick="goToIdentityManager()">
+                <span class="nav-icon">🔐</span>
+                <span class="nav-label">Tożsamości</span>
+            </button>
+            <button class="nav-item active" onclick="goToSecurityCenter()">
+                <span class="nav-icon">🛡️</span>
+                <span class="nav-label">Bezpieczeństwo</span>
+            </button>
+            <button class="nav-item" onclick="goToSettings()">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-label">Ustawienia</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Settings Screen -->
+    <div id="settingsScreen" class="screen">
+        <div class="app-container">
+            <header class="top-header">
+                <button class="btn-back" onclick="goToDashboard()">← Panel</button>
+                <h2>Ustawienia</h2>
+                <div></div>
+            </header>
+
+            <main class="settings-main">
+                <div class="settings-section">
+                    <h3>Profil</h3>
+                    <div class="settings-item">
+                        <label>Imię i nazwisko</label>
+                        <div class="setting-value">Jan Kowalski</div>
+                    </div>
+                    <div class="settings-item">
+                        <label>E-mail</label>
+                        <div class="setting-value">jan@email.com</div>
+                    </div>
+                    <button class="btn btn-secondary" onclick="editProfile()">Edytuj profil</button>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Prywatność i bezpieczeństwo</h3>
+                    <div class="settings-toggle">
+                        <label>Automatyczne wylogowanie po 15 minutach bezczynności</label>
+                        <input type="checkbox" checked>
+                    </div>
+                    <div class="settings-toggle">
+                        <label>Wysyłaj mi alerty o nowych logowaniach</label>
+                        <input type="checkbox" checked>
+                    </div>
+                    <div class="settings-toggle">
+                        <label>Włącz powiadomienia push</label>
+                        <input type="checkbox" checked>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Zgody i cookies</h3>
+                    <button class="btn btn-secondary" onclick="goToConsentManager()">Zarządzaj zgodami</button>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Dane i prywatność</h3>
+                    <button class="btn btn-secondary" onclick="exportData()">Pobierz moje dane (RODO)</button>
+                    <button class="btn btn-secondary" onclick="deleteAccount()">Usuń konto</button>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Informacja</h3>
+                    <p>Wersja: 1.0.0</p>
+                    <button class="btn btn-secondary" onclick="viewPrivacy()">Polityka prywatności</button>
+                    <button class="btn btn-secondary" onclick="viewTerms()">Warunki użytkowania</button>
+                </div>
+            </main>
+        </div>
+
+        <nav class="bottom-nav">
+            <button class="nav-item" onclick="goToDashboard()">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Panel</span>
+            </button>
+            <button class="nav-item" onclick="goToIdentityManager()">
+                <span class="nav-icon">🔐</span>
+                <span class="nav-label">Tożsamości</span>
+            </button>
+            <button class="nav-item" onclick="goToSecurityCenter()">
+                <span class="nav-icon">🛡️</span>
+                <span class="nav-label">Bezpieczeństwo</span>
+            </button>
+            <button class="nav-item active" onclick="goToSettings()">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-label">Ustawienia</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Modal Templates -->
+    <div id="alertModal" class="modal">
+        <div class="modal-content">
+            <h3 id="alertTitle">Potwierdzenie akcji</h3>
+            <p id="alertMessage">Czy na pewno chcesz kontynuować?</p>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" onclick="closeModal()">Anuluj</button>
+                <button class="btn btn-primary" onclick="confirmAction()">Potwierdź</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
