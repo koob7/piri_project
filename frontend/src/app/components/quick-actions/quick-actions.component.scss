@@ -1,0 +1,35 @@
+﻿.quick-actions {
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 15px 25px;
+  border-radius: 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+
+  &:hover {
+    background: #1a3a4a;
+    border-color: var(--primary-green);
+  }
+}
+
+.action-icon {
+  font-size: 24px;
+}

@@ -1,0 +1,24 @@
+﻿.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  flex: 1;
+  padding: 12px;
+  background: #1a3a4a;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 13px;
+  text-align: center;
+  transition: all 0.3s;
+
+  &.active {
+    background: var(--card-bg);
+    border-color: var(--primary-green);
+    color: var(--primary-green);
+  }
+}

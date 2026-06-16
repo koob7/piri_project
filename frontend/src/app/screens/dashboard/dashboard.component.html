@@ -1,0 +1,16 @@
+﻿<div class="dashboard-header">
+  <div>
+    <h1>Witaj, Jan</h1>
+    <p>Twoja tożsamość cyfrowa jest bezpieczna</p>
+  </div>
+  <svg class="shield-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M50 10 L80 25 L80 50 Q80 75 50 85 Q20 75 20 50 L20 25 Z" fill="none" stroke="#e0e0e0" stroke-width="3" stroke-linejoin="round"/>
+    <line x1="30" y1="35" x2="70" y2="35" stroke="#e0e0e0" stroke-width="2.5"/>
+    <line x1="30" y1="48" x2="70" y2="48" stroke="#e0e0e0" stroke-width="2.5"/>
+    <line x1="30" y1="61" x2="70" y2="61" stroke="#e0e0e0" stroke-width="2.5"/>
+  </svg>
+</div>
+
+<app-security-card [value]="securityScore"></app-security-card>
+<app-quick-actions [actions]="quickActions"></app-quick-actions>
+<app-recent-activity [activities]="activities"></app-recent-activity>

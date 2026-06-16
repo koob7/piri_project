@@ -1,0 +1,303 @@
+﻿.wallet-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  margin-top: -15px;
+}
+
+/* NFC Card */
+.nfc-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 25px;
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.nfc-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.nfc-content {
+  flex: 1;
+}
+
+.nfc-content h3 {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.nfc-status {
+  color: var(--text-muted);
+  font-size: 12px;
+  margin: 0 0 10px 0;
+}
+
+.nfc-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.amount-green {
+  color: var(--primary-green);
+  font-weight: 600;
+}
+
+/* Section Title */
+.section-title {
+  font-size: 14px;
+  color: var(--text-primary);
+  margin: 25px 0 15px 0;
+  font-weight: 600;
+}
+
+/* Cards Stack Container */
+.cards-stack-container {
+  position: relative;
+  width: 100%;
+  height: 330px;
+  margin-bottom: 20px;
+  perspective: 1000px;
+}
+
+/* Card Stack Item (wrapper for each card) */
+.card-stack-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  transition: transform 0.1s linear;
+  cursor: grab;
+
+  &.dragging {
+    cursor: grabbing;
+  }
+}
+
+/* Digital Card */
+.digital-card {
+  border-radius: 16px;
+  padding: 20px;
+  color: white;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+}
+
+.blue-card {
+  background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%);
+}
+
+.dark-card {
+  background: linear-gradient(135deg, #2a3a52 0%, #1a2a42 100%);
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.card-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.card-title {
+  flex: 1;
+}
+
+.card-title h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.card-avatar {
+  font-size: 32px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* Card Details */
+.card-details {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 15px;
+  font-size: 13px;
+  line-height: 1.6;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+.card-details p {
+  margin: 0 0 8px 0;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.more-details {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  float: right;
+  margin-top: 5px;
+  transition: color 0.2s;
+
+  &:hover {
+    color: rgba(255, 255, 255, 1);
+  }
+}
+
+/* Card Number Sections */
+.card-number-section {
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.card-number-section.orange {
+  background: #ff9800;
+  color: white;
+  font-weight: 600;
+}
+
+.card-number-section.dark {
+  background: rgba(0, 0, 0, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+.card-number {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Add Card Button */
+.btn-add-card {
+  background: #6b8fc7;
+  color: white;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  transition: all 0.3s;
+
+  &:hover {
+    background: #5a7ebc;
+  }
+}
+
+/* Last Transaction */
+.last-transaction {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.last-transaction span:first-child {
+  color: var(--text-secondary);
+}
+
+.transaction-detail {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Swipe hint */
+.card-stack-item:first-child::after {
+  content: 'Przesuń, aby zmienić kartę';
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  animation: fadeInOut 3s infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .cards-stack-container {
+    height: 350px;
+  }
+
+  .digital-card {
+    padding: 15px;
+  }
+
+  .card-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .card-number-section {
+    padding: 10px;
+    font-size: 12px;
+  }
+}

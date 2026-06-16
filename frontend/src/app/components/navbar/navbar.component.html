@@ -1,0 +1,17 @@
+﻿<div class="nav-bar">
+  <button class="nav-item" [class.active]="currentScreen === 'dashboard'" (click)="navigate('dashboard')">
+    📊
+  </button>
+  <button class="nav-item" [class.active]="currentScreen === 'identity'" (click)="navigate('identity')">
+    📱
+  </button>
+  <button class="nav-item" [class.active]="currentScreen === 'security'" (click)="navigate('security')">
+    🔒
+  </button>
+  <button class="nav-item" [class.active]="currentScreen === 'wallet'" (click)="navigate('wallet')">
+    💳
+  </button>
+  <button class="nav-item" [class.active]="currentScreen === 'settings'" (click)="navigate('settings')">
+    ⚙️
+  </button>
+</div>
