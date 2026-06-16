@@ -20,14 +20,15 @@
     @for (card of paymentCards; track card.id; let index = $index) {
       <div
         class="card-stack-item"
+        [class.is-top]="index === 0"
         [class.identity-card]="card.kind === 'identity'"
         [class.payment-card]="card.kind === 'payment'"
-        [class.payment-card-orange]="index === 1"
-        [class.payment-card-dark]="index === 2"
-        [ngStyle]="{
-          'z-index': 100 - index,
-          'transform': 'translateY(' + (index * 108) + 'px) scale(' + (1 - (index * 0.035)) + ')'
-        }"
+        [class.theme-blue]="card.theme === 'blue'"
+        [class.theme-orange]="card.theme === 'orange'"
+        [class.theme-dark]="card.theme === 'dark'"
+        (click)="bringCardToFront(index)"
+        [ngStyle]="getCardStyle(index)"
+        [style.background]="card.background"
       >
         @if (card.kind === 'identity') {
           <div class="identity-card-content">
@@ -47,12 +48,21 @@
               <p>Pesel: <strong>{{ card.pesel }}</strong></p>
             </div>
 
-            <a href="#" class="more-details">Więcej szczegółów</a>
+            @if (index === 0) {
+              <button class="more-details" type="button" (click)="showMoreDetails(card.id); $event.stopPropagation()">Więcej szczegółów</button>
+            }
           </div>
         } @else {
           <div class="payment-card-content">
-            <div class="payment-topline">
-              <span class="payment-dots">••••</span>
+            <div class="payment-header">
+              <span class="payment-type">{{ card.issuer }}</span>
+            </div>
+            <h4>{{ card.title }}</h4>
+            <div class="payment-details">
+              <p>Posiadacz: <strong>{{ card.holder }}</strong></p>
+              <p>Ważna do: <strong>{{ card.expiry }}</strong></p>
+            </div>
+            <div class="payment-footer">
               <span class="payment-number">{{ card.mask }}</span>
             </div>
           </div>

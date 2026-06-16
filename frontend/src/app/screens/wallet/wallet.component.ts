@@ -2,17 +2,21 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 type StackCardKind = 'identity' | 'payment';
+type StackCardTheme = 'blue' | 'orange' | 'dark';
 
 interface WalletStackCard {
   id: string;
   kind: StackCardKind;
+  theme: StackCardTheme;
+  background: string;
   title?: string;
   mask?: string;
-  background: string;
-  accent?: string;
   name?: string;
   birthDate?: string;
   pesel?: string;
+  holder?: string;
+  expiry?: string;
+  issuer?: string;
 }
 
 @Component({
@@ -27,9 +31,9 @@ export class WalletComponent {
     {
       id: 'identity',
       kind: 'identity',
-      title: 'Dokument tożsamości',
+      theme: 'blue',
       background: 'linear-gradient(180deg, #1767eb 0%, #0f59da 100%)',
-      accent: '#ffffff',
+      title: 'Dokument tożsamości',
       name: 'Jan Kowalski',
       birthDate: '15.06.2000',
       pesel: '13548625498'
@@ -37,16 +41,24 @@ export class WalletComponent {
     {
       id: 'payment-4658',
       kind: 'payment',
-      mask: '•••• 4658',
+      theme: 'orange',
       background: 'linear-gradient(180deg, #d9842a 0%, #cf7a1f 100%)',
-      title: 'Karta płatnicza'
+      mask: '•••• 4658',
+      title: 'Karta płatnicza',
+      holder: 'Jan Kowalski',
+      expiry: '12/25',
+      issuer: 'Visa'
     },
     {
       id: 'payment-3545',
       kind: 'payment',
-      mask: '•••• 3545',
+      theme: 'dark',
       background: 'linear-gradient(180deg, #23324a 0%, #1d2840 100%)',
-      title: 'Karta płatnicza'
+      mask: '•••• 3545',
+      title: 'Karta płatnicza',
+      holder: 'Jan Kowalski',
+      expiry: '08/26',
+      issuer: 'MasterCard'
     }
   ];
 
@@ -61,35 +73,24 @@ export class WalletComponent {
     monthlySpent: '2357,33 zł'
   };
 
-  cardTransform = { x: 0, y: 0, rotation: 0 };
-  isDragging = false;
-  startX = 0;
-  startY = 0;
+  bringCardToFront(cardIndex: number): void {
+    if (cardIndex <= 0) {
+      return;
+    }
 
-  onMouseDown(event: MouseEvent): void {
-    this.isDragging = true;
-    this.startX = event.clientX;
-    this.startY = event.clientY;
+    const [selectedCard] = this.paymentCards.splice(cardIndex, 1);
+    this.paymentCards.unshift(selectedCard);
   }
 
-  onMouseMove(event: MouseEvent): void {
-    if (!this.isDragging) return;
-
-    const diffX = event.clientX - this.startX;
-    const diffY = event.clientY - this.startY;
-    const rotation = (diffX / 100) * 10;
-
-    this.cardTransform = {
-      x: diffX,
-      y: diffY,
-      rotation: rotation
+  getCardStyle(index: number): Record<string, string> {
+    return {
+      'z-index': String(100 - index),
+      'transform': 'translateY(' + (index * 96) + 'px)'
     };
   }
 
-  onMouseUp(event: MouseEvent): void {
-    if (!this.isDragging) return;
-    this.isDragging = false;
-    this.cardTransform = { x: 0, y: 0, rotation: 0 };
+  showMoreDetails(cardId: string): void {
+    console.log('Show details for', cardId);
   }
 
   addNewCard(): void {
