@@ -1,37 +1,86 @@
-﻿<h1>Centrum bezpieczeństwa</h1>
-<p class="subtitle">Monitoruj zagrożenia i alerty</p>
+﻿<div class="security-container">
+  <h1>Centrum bezpieczeństwa</h1>
+  <p class="subtitle">Monitoruj zagrożenia i alerty</p>
 
-<div class="security-status-card safe">
-  <div class="status-icon">🛡️</div>
-  <div class="status-content">
-    <div class="status-title">Skanowanie Internetu zakończone</div>
-    <p class="status-time">Ostatnie skanowanie: 2 godzin temu</p>
-    <div class="status-detail">Wylyte wszystkie hasła: <strong>0 znalezionych</strong></div>
+  <!-- Status Card - Safe -->
+  <div class="status-card safe">
+    <div class="status-header">
+      <span class="status-icon safe">🛡️</span>
+      <div class="status-content">
+        <h3 class="status-title">Skanowanie internetu zakończone</h3>
+        <p class="status-subtitle">Ostatni skan: 2 godziny temu</p>
+      </div>
+    </div>
+    <div class="status-detail">
+      <span>{{ securityData.scanCompleted.passwords.label }}</span>
+      <span class="status-value green">{{ securityData.scanCompleted.passwords.count }}</span>
+    </div>
   </div>
-</div>
 
-<div class="security-status-card alert">
-  <div class="status-icon">⚠️</div>
-  <div class="status-content">
-    <div class="status-title alert-title">Wykryto podejrzane logowanie</div>
-    <p class="status-time">mBank - Moskwa</p>
-  </div>
-</div>
+  <!-- Alert Card - Suspicious Login -->
+  <div class="alert-card">
+    <div class="alert-header">
+      <span class="alert-icon">🛡️</span>
+      <div class="alert-content">
+        <h3 class="alert-title">{{ securityData.suspiciousLogin.title }}</h3>
+        <p class="alert-location">{{ securityData.suspiciousLogin.location }}</p>
+      </div>
+    </div>
+    
+    <div class="alert-details">
+      <div class="detail-row">
+        <span>Adres IP</span>
+        <span class="detail-value">{{ securityData.suspiciousLogin.details.ip }}</span>
+      </div>
+      <div class="detail-row">
+        <span>Czas</span>
+        <span class="detail-value">{{ securityData.suspiciousLogin.details.time }}</span>
+      </div>
+      <div class="detail-row">
+        <span>Urządzenie</span>
+        <span class="detail-value">{{ securityData.suspiciousLogin.details.device }}</span>
+      </div>
+    </div>
 
-<div class="stats-grid">
-  <div class="stat-card">
-    <div class="stat-icon">🔐</div>
-    <div class="stat-value">45</div>
-    <div class="stat-label">Chronione hasła</div>
+    <div class="alert-actions">
+      <button class="btn-outline" (click)="verifyLogin()">
+        👤 Zweryfikuj
+      </button>
+      <button class="btn-danger" (click)="blockLogin()">
+        🔒 Zablokuj
+      </button>
+    </div>
   </div>
-  <div class="stat-card">
-    <div class="stat-icon">✅</div>
-    <div class="stat-value">12/12</div>
-    <div class="stat-label">Aktywne 2FA</div>
+
+  <!-- Stats Grid -->
+  <div class="stats-grid">
+    @for (stat of securityData.stats; track stat.label) {
+      <div class="stat-card">
+        <div class="stat-icon">{{ stat.icon }}</div>
+        <div class="stat-value">{{ stat.value }}</div>
+        <div class="stat-label">{{ stat.label }}</div>
+      </div>
+    }
   </div>
-  <div class="stat-card">
-    <div class="stat-icon">🌐</div>
-    <div class="stat-value">127</div>
-    <div class="stat-label">Segn VPN</div>
+
+  <!-- Premium Support -->
+  <div class="premium-section">
+    <h3 class="premium-title">{{ securityData.premium.title }}</h3>
+    <p class="premium-description">{{ securityData.premium.description }}</p>
+    <button class="btn-chat" (click)="chatWithExpert()">
+      💬 Czat z ekspertem
+    </button>
+  </div>
+
+  <!-- Next Scan & Alerts -->
+  <div class="scan-info">
+    <div>
+      <span class="scan-label">Następne skanowanie</span>
+      <span class="scan-time">{{ securityData.nextScan }}</span>
+    </div>
+    <div>
+      <span class="alerts-label">Aktywne alerty</span>
+      <span class="alerts-count">{{ securityData.activeAlerts }}</span>
+    </div>
   </div>
 </div>
