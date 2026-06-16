@@ -1,7 +1,19 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StateService } from '../../services/state.service';
-import { PaymentCard } from '../../models';
+
+type StackCardKind = 'identity' | 'payment';
+
+interface WalletStackCard {
+  id: string;
+  kind: StackCardKind;
+  title?: string;
+  mask?: string;
+  background: string;
+  accent?: string;
+  name?: string;
+  birthDate?: string;
+  pesel?: string;
+}
 
 @Component({
   selector: 'app-wallet',
@@ -10,25 +22,31 @@ import { PaymentCard } from '../../models';
   templateUrl: './wallet.component.html',
   styleUrl: './wallet.component.scss'
 })
-export class WalletComponent implements OnInit {
-  paymentCards = [
+export class WalletComponent {
+  paymentCards: WalletStackCard[] = [
     {
-      id: '1',
-      type: 'ID',
-      lastDigits: '4658',
-      expiryDate: '12/25',
-      gradient: 'linear-gradient(135deg, #1e90ff 0%, #00bfff 100%)',
+      id: 'identity',
+      kind: 'identity',
+      title: 'Dokument tożsamości',
+      background: 'linear-gradient(180deg, #1767eb 0%, #0f59da 100%)',
+      accent: '#ffffff',
       name: 'Jan Kowalski',
       birthDate: '15.06.2000',
       pesel: '13548625498'
     },
     {
-      id: '2',
-      type: 'Credit Card',
-      lastDigits: '3545',
-      expiryDate: '08/26',
-      gradient: 'linear-gradient(135deg, #2a3a52 0%, #1a2a42 100%)',
-      issuer: 'MasterCard'
+      id: 'payment-4658',
+      kind: 'payment',
+      mask: '•••• 4658',
+      background: 'linear-gradient(180deg, #d9842a 0%, #cf7a1f 100%)',
+      title: 'Karta płatnicza'
+    },
+    {
+      id: 'payment-3545',
+      kind: 'payment',
+      mask: '•••• 3545',
+      background: 'linear-gradient(180deg, #23324a 0%, #1d2840 100%)',
+      title: 'Karta płatnicza'
     }
   ];
 
@@ -43,17 +61,10 @@ export class WalletComponent implements OnInit {
     monthlySpent: '2357,33 zł'
   };
 
-  currentCardIndex = 0;
   cardTransform = { x: 0, y: 0, rotation: 0 };
   isDragging = false;
   startX = 0;
   startY = 0;
-
-  constructor(private stateService: StateService) {}
-
-  ngOnInit(): void {
-    // Mock data loaded from component
-  }
 
   onMouseDown(event: MouseEvent): void {
     this.isDragging = true;
@@ -78,28 +89,7 @@ export class WalletComponent implements OnInit {
   onMouseUp(event: MouseEvent): void {
     if (!this.isDragging) return;
     this.isDragging = false;
-
-    const diffX = event.clientX - this.startX;
-
-    // If swiped more than 50px, remove card
-    if (Math.abs(diffX) > 50) {
-      this.swipeCard(diffX > 0 ? 'right' : 'left');
-    } else {
-      // Reset position
-      this.cardTransform = { x: 0, y: 0, rotation: 0 };
-    }
-  }
-
-  swipeCard(direction: 'left' | 'right'): void {
-    const exitX = direction === 'right' ? 500 : -500;
-    this.cardTransform = { x: exitX, y: 100, rotation: direction === 'right' ? 20 : -20 };
-
-    setTimeout(() => {
-      if (this.currentCardIndex < this.paymentCards.length - 1) {
-        this.currentCardIndex++;
-        this.cardTransform = { x: 0, y: 0, rotation: 0 };
-      }
-    }, 300);
+    this.cardTransform = { x: 0, y: 0, rotation: 0 };
   }
 
   addNewCard(): void {

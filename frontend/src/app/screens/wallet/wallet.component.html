@@ -1,8 +1,7 @@
-﻿<div class="wallet-container">
+<div class="wallet-container">
   <h1>Portfel NFC</h1>
   <p class="subtitle">Zbliź, aby zapłacić lub zweryfikować</p>
 
-  <!-- NFC Module Section -->
   <div class="nfc-card">
     <div class="nfc-icon">💳</div>
     <div class="nfc-content">
@@ -15,85 +14,57 @@
     </div>
   </div>
 
-  <!-- Digital Cards Section -->
   <h3 class="section-title">Cyfrowe karty</h3>
 
-  <!-- Cards Stack Container -->
   <div class="cards-stack-container">
-    @if (paymentCards && paymentCards.length > 0) {
-      @for (card of paymentCards; track card.id) {
-        @if (currentCardIndex <= $index) {
-          <div 
-            class="card-stack-item"
-            [ngStyle]="currentCardIndex === $index ? {
-              'transform': 'translateX(' + cardTransform.x + 'px) translateY(' + cardTransform.y + 'px) rotate(' + cardTransform.rotation + 'deg) scale(' + (1 - ($index - currentCardIndex) * 0.05) + ')',
-              'z-index': (100 - $index)
-            } : {
-              'transform': 'translateY(' + ($index - currentCardIndex) * 12 + 'px) scale(' + (1 - ($index - currentCardIndex) * 0.05) + ')',
-              'z-index': (100 - $index),
-              'pointer-events': 'none'
-            }"
-            (mousedown)="onMouseDown($event)"
-            (mousemove)="onMouseMove($event)"
-            (mouseup)="onMouseUp($event)"
-            (mouseleave)="isDragging = false"
-          >
-            @if (card.id === '1') {
-              <!-- ID Document Card (Blue) -->
-              <div class="digital-card blue-card">
-                <div class="card-header">
-                  <span class="card-icon">🆔</span>
-                  <div class="card-title">
-                    <h4>Dokument tożsamości</h4>
-                  </div>
-                  <div class="card-avatar">👤</div>
-                </div>
-                <div class="card-details">
-                  <p>Imię i nazwisko: <strong>{{ card.name }}</strong></p>
-                  <p>Data urodzenia: <strong>{{ card.birthDate }}</strong></p>
-                  <p>Pesez: <strong>{{ card.pesel }}</strong></p>
-                  <a href="#" class="more-details">Więcej szczegółów</a>
-                </div>
-                <div class="card-number-section orange">
-                  <span class="card-number">•••• {{ card.lastDigits }}</span>
-                </div>
-                <div class="card-number-section dark">
-                  <span class="card-number">•••• 3545</span>
-                </div>
+    @for (card of paymentCards; track card.id; let index = $index) {
+      <div
+        class="card-stack-item"
+        [class.identity-card]="card.kind === 'identity'"
+        [class.payment-card]="card.kind === 'payment'"
+        [class.payment-card-orange]="index === 1"
+        [class.payment-card-dark]="index === 2"
+        [ngStyle]="{
+          'z-index': 100 - index,
+          'transform': 'translateY(' + (index * 108) + 'px) scale(' + (1 - (index * 0.035)) + ')'
+        }"
+      >
+        @if (card.kind === 'identity') {
+          <div class="identity-card-content">
+            <div class="identity-header">
+              <div class="identity-badge">
+                <span class="identity-fingerprint">◌</span>
+                <span class="identity-badge-label">ID</span>
               </div>
-            } @else if (card.id === '2') {
-              <!-- Second Card (Dark) -->
-              <div class="digital-card dark-card">
-                <div class="card-header">
-                  <span class="card-icon">💳</span>
-                  <div class="card-title">
-                    <h4>Karta MasterCard</h4>
-                  </div>
-                  <div class="card-avatar">💳</div>
-                </div>
-                <div class="card-details">
-                  <p>Posiadacz: <strong>Jan Kowalski</strong></p>
-                  <p>Ważna do: <strong>08/26</strong></p>
-                  <p>Typ: <strong>MasterCard</strong></p>
-                  <a href="#" class="more-details">Więcej szczegółów</a>
-                </div>
-                <div class="card-number-section dark">
-                  <span class="card-number">•••• {{ card.lastDigits }}</span>
-                </div>
-              </div>
-            }
+              <div class="identity-avatar">👤</div>
+            </div>
+
+            <h4>{{ card.title }}</h4>
+
+            <div class="identity-details">
+              <p>Imię i nazwisko: <strong>{{ card.name }}</strong></p>
+              <p>Data urodzenia: <strong>{{ card.birthDate }}</strong></p>
+              <p>Pesel: <strong>{{ card.pesel }}</strong></p>
+            </div>
+
+            <a href="#" class="more-details">Więcej szczegółów</a>
+          </div>
+        } @else {
+          <div class="payment-card-content">
+            <div class="payment-topline">
+              <span class="payment-dots">••••</span>
+              <span class="payment-number">{{ card.mask }}</span>
+            </div>
           </div>
         }
-      }
+      </div>
     }
   </div>
 
-  <!-- Add New Card Button -->
   <button class="btn btn-add-card" (click)="addNewCard()">
     + Dodaj nową kartę
   </button>
 
-  <!-- Last Transaction -->
   <div class="last-transaction">
     <span>Ostatnia transakcja</span>
     <span class="transaction-detail">{{ lastTransaction.merchant }} - {{ lastTransaction.amount }}</span>
