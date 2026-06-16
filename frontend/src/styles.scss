@@ -28,6 +28,7 @@ html, body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  background: transparent;
 }
 
 .content-wrapper {
@@ -38,6 +39,7 @@ html, body {
   margin: 0 auto;
   width: 100%;
   padding-bottom: 80px;
+  background: url('/assets/curves.png') center center / contain no-repeat;
 }
 
 // Utility Classes
