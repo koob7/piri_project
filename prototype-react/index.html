@@ -389,6 +389,183 @@
             z-index: 1;
             pointer-events: none;
         }
+
+        /* ===== WALLET REDESIGN ===== */
+
+        .wallet-header{
+            margin-bottom:20px;
+        }
+
+        .wallet-header h2{
+            color:#fff;
+            font-size:24px;
+            margin-bottom:4px;
+        }
+
+        .wallet-header p{
+            font-size:12px;
+            color:#8da0b5;
+        }
+
+        .wallet-nfc-card{
+            background:linear-gradient(135deg,#173652 0%,#1f4769 100%);
+            border:1px solid #2f5675;
+            border-radius:14px;
+            padding:16px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:20px;
+        }
+
+        .wallet-title{
+            font-size:15px;
+            font-weight:600;
+            color:#fff;
+        }
+
+        .wallet-subtitle{
+            font-size:12px;
+            color:#9db4ca;
+            margin-top:4px;
+        }
+
+        .wallet-balance{
+            font-size:20px;
+            font-weight:700;
+            color:#00d084;
+        }
+
+        .wallet-section-title{
+            color:#aab6c5;
+            font-size:14px;
+            font-weight:600;
+            margin-bottom:12px;
+        }
+
+        .wallet-id-card{
+            background:linear-gradient(
+                135deg,
+                #2476ff 0%,
+                #0e56da 100%
+            );
+            border-radius:16px;
+            padding:18px;
+            color:#fff;
+            margin-bottom:10px;
+        }
+
+        .wallet-id-top{
+            display:flex;
+            justify-content:space-between;
+            align-items:flex-start;
+            margin-bottom:20px;
+        }
+
+        .wallet-id-type{
+            font-size:20px;
+            font-weight:700;
+        }
+
+        .wallet-id-label{
+            font-size:12px;
+            opacity:0.9;
+        }
+
+        .wallet-avatar{
+            width:50px;
+            height:50px;
+            border:2px solid rgba(255,255,255,.35);
+            border-radius:10px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:22px;
+        }
+
+        .wallet-id-content{
+            font-size:13px;
+            line-height:1.8;
+        }
+
+        .wallet-details-btn{
+            margin-top:14px;
+            background:rgba(255,255,255,.15);
+            border:1px solid rgba(255,255,255,.25);
+            color:#fff;
+            padding:8px 12px;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+        .wallet-bank-card{
+            padding:16px;
+            border-radius:12px;
+            color:#fff;
+            font-weight:700;
+            letter-spacing:2px;
+            margin-bottom:8px;
+        }
+
+        .wallet-bank-card.orange{
+            background:linear-gradient(
+                135deg,
+                #e9a038 0%,
+                #d98200 100%
+            );
+        }
+
+        .wallet-bank-card.gray{
+            background:linear-gradient(
+                135deg,
+                #6b7280 0%,
+                #4b5563 100%
+            );
+        }
+
+        .wallet-add-card{
+            width:100%;
+            border:none;
+            border-radius:12px;
+            background:linear-gradient(
+                135deg,
+                #4e7197 0%,
+                #3e5f84 100%
+            );
+            color:#fff;
+            padding:14px;
+            font-size:14px;
+            font-weight:600;
+            cursor:pointer;
+            margin:12px 0 20px;
+        }
+
+        .wallet-transaction{
+            background:#132a3f;
+            border:1px solid #1a3a4a;
+            border-radius:12px;
+            padding:14px 16px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .wallet-transaction-label{
+            color:#8da0b5;
+            font-size:12px;
+            margin-bottom:4px;
+        }
+
+        .wallet-transaction-name{
+            color:#fff;
+            font-weight:600;
+        }
+
+        .wallet-transaction-amount{
+            color:#fff;
+            font-weight:700;
+        }
+
     </style>
 </head>
 <body>
@@ -692,65 +869,84 @@
 
             <!-- WALLET SCREEN -->
             <div class="screen" id="wallet">
-                <h1 style="margin-bottom: 10px;">Portfel NFC</h1>
-                <p style="font-size: 12px; color: #888; margin-bottom: 20px;">Zbir, aby zaplatać całe bezpieczeństwo</p>
-                
-                <!-- NFC Module -->
-                <div class="card" style="border: 1px solid #00d084; background: #1a3f4a; margin-bottom: 20px;">
-                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px;">
-                        <div style="font-size: 24px;">💳</div>
-                        <div>
-                            <div style="font-weight: bold; color: #e0e0e0;">Moduł NFC</div>
-                            <p style="font-size: 12px; color: #00d084;">Aktywny i bezpieczny</p>
-                        </div>
+
+                <div class="wallet-header">
+                    <h2>Portfel NFC</h2>
+                    <p>Zbliż, aby zapłacić lub zweryfikować</p>
+                </div>
+
+                <!-- NFC -->
+                <div class="wallet-nfc-card">
+                    <div>
+                        <div class="wallet-title">💳 Moduł NFC</div>
+                        <div class="wallet-subtitle">Aktywny i bezpieczny</div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid #1a3a4a;">
-                        <span style="font-size: 12px; color: #888;">Wydane w tym miesiącu</span>
-                        <span style="font-size: 18px; font-weight: bold; color: #00d084;">2357,33 zł</span>
+
+                    <div class="wallet-balance">
+                        2357,33 zł
                     </div>
                 </div>
 
-                <!-- Digital Cards Section -->
-                <h3 style="font-size: 14px; font-weight: 600; color: #aaa; margin-bottom: 15px;">Cyfrowe karty</h3>
+                <div class="wallet-section-title">
+                    Cyfrowe karty
+                </div>
 
-                <!-- ID Document Card -->
-                <div style="background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%); border-radius: 12px; padding: 20px; margin-bottom: 12px; color: #fff; position: relative; overflow: hidden;">
-                    <div style="position: absolute; top: 15px; right: 15px; width: 50px; height: 50px; border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 8px;"></div>
-                    <div style="margin-bottom: 25px;">
-                        <div style="font-size: 20px; margin-bottom: 5px;">🏛️</div>
-                        <div style="font-weight: bold; font-size: 16px;">ID</div>
-                        <div style="font-size: 13px; opacity: 0.9;">Dokument tożsamości</div>
+                <!-- ID CARD -->
+                <div class="wallet-id-card">
+
+                    <div class="wallet-id-top">
+                        <div>
+                            <div class="wallet-id-type">ID</div>
+                            <div class="wallet-id-label">
+                                Dokument tożsamości
+                            </div>
+                        </div>
+
+                        <div class="wallet-avatar">
+                            👤
+                        </div>
                     </div>
-                    <div style="font-size: 12px; line-height: 1.6;">
+
+                    <div class="wallet-id-content">
                         <div>Imię i nazwisko: Jan Kowalski</div>
                         <div>Data urodzenia: 15.06.2000</div>
-                        <div style="margin-top: 8px;">Pesel: 13548625498</div>
+                        <div>Pesel: 13548625498</div>
                     </div>
-                    <button class="btn" style="background: none; border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; margin-top: 12px; padding: 8px 12px; width: fit-content; font-size: 12px;">Więcej szczegółów</button>
+
+                    <button class="wallet-details-btn">
+                        Więcej szczegółów
+                    </button>
                 </div>
 
-                <!-- Payment Cards -->
-                <div style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); border-radius: 12px; padding: 15px; margin-bottom: 10px; color: #fff;">
-                    <div style="font-size: 14px; letter-spacing: 2px; font-weight: bold;">•••• 4658</div>
+                <!-- PAYMENT CARDS -->
+                <div class="wallet-bank-card orange">
+                    •••• 4658
                 </div>
 
-                <div style="background: linear-gradient(135deg, #666 0%, #444 100%); border-radius: 12px; padding: 15px; margin-bottom: 20px; color: #fff;">
-                    <div style="font-size: 14px; letter-spacing: 2px; font-weight: bold;">•••• 3545</div>
+                <div class="wallet-bank-card gray">
+                    •••• 3545
                 </div>
 
-                <!-- Add Card Button -->
-                <button class="btn" style="background: linear-gradient(135deg, #4d7a8f 0%, #3a6080 100%); margin-bottom: 20px;">+ Dodaj nową kartę</button>
+                <button class="wallet-add-card">
+                    + Dodaj nową kartę
+                </button>
 
-                <!-- Last Transaction -->
-                <div class="card">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <div style="font-size: 12px; color: #888;">Ostatnia transakcja</div>
-                            <div style="font-weight: bold; color: #e0e0e0; margin-top: 5px;">Orlen</div>
+                <!-- LAST TRANSACTION -->
+                <div class="wallet-transaction">
+                    <div>
+                        <div class="wallet-transaction-label">
+                            Ostatnia transakcja
                         </div>
-                        <div style="font-size: 14px; font-weight: bold; color: #e0e0e0;">- 235,68 zł</div>
+                        <div class="wallet-transaction-name">
+                            Orlen
+                        </div>
+                    </div>
+
+                    <div class="wallet-transaction-amount">
+                        -235,68 zł
                     </div>
                 </div>
+
             </div>
 
             <!-- SETTINGS SCREEN -->
