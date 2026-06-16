@@ -1,17 +1,17 @@
 ﻿<div class="nav-bar">
   <button class="nav-item" [class.active]="currentScreen === 'dashboard'" (click)="navigate('dashboard')">
-    📊
+    <img src="/assets/icons/home.png" alt="Dashboard">
   </button>
   <button class="nav-item" [class.active]="currentScreen === 'identity'" (click)="navigate('identity')">
-    📱
+    <img src="/assets/icons/person.png" alt="Tożsamość">
   </button>
   <button class="nav-item" [class.active]="currentScreen === 'security'" (click)="navigate('security')">
-    🔒
+    <img src="/assets/icons/shield.png" alt="Bezpieczeństwo">
   </button>
   <button class="nav-item" [class.active]="currentScreen === 'wallet'" (click)="navigate('wallet')">
-    💳
+    <img src="/assets/icons/wallet.png" alt="Portfel">
   </button>
   <button class="nav-item" [class.active]="currentScreen === 'settings'" (click)="navigate('settings')">
-    ⚙️
+    <img src="/assets/icons/settings.png" alt="Ustawienia">
   </button>
 </div>
