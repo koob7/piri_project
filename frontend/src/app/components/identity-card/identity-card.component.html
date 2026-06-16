@@ -1,0 +1,25 @@
+﻿<div class="identity-card">
+  <div class="identity-header">
+    <div class="identity-name">{{ identity.name }}</div>
+    <div class="verified-badge" [class.verified]="identity.verified">
+      {{ identity.verified ? '✅ Zweryfikowany' : '⏱️ Tymczasowy' }}
+    </div>
+  </div>
+
+  @if(identity.email) {
+    <div class="identity-info">✉️ {{ identity.email }}</div>
+  }
+
+  @if(identity.birthDate) {
+    <div class="identity-info">📅 Data urodzenia: {{ identity.birthDate }}</div>
+  }
+
+  <div class="identity-stats">
+    @for(stat of identity.stats; track stat.label) {
+      <div class="identity-stat">
+        <div class="identity-stat-value">{{ stat.value }}</div>
+        <div class="identity-stat-label">{{ stat.label }}</div>
+      </div>
+    }
+  </div>
+</div>

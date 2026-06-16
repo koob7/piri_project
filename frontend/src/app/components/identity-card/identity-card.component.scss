@@ -1,0 +1,70 @@
+﻿.identity-card {
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  margin-bottom: 15px;
+}
+
+.identity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.identity-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.verified-badge {
+  padding: 4px 12px;
+  border-radius: 16px;
+  background: #2a3a3a;
+  border: 1px solid #666;
+  color: #aaa;
+  font-weight: 600;
+  font-size: 11px;
+
+  &.verified {
+    background: #1a3a2e;
+    border-color: var(--primary-green);
+    color: var(--primary-green);
+  }
+}
+
+.identity-info {
+  font-size: 13px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  color: var(--text-primary);
+}
+
+.identity-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.identity-stat {
+  text-align: center;
+  padding: 12px;
+  background: #0f2236;
+  border-radius: 8px;
+}
+
+.identity-stat-value {
+  font-size: 20px;
+  color: var(--primary-green);
+  font-weight: bold;
+}
+
+.identity-stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 5px;
+}

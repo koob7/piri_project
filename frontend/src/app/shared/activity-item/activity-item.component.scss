@@ -1,0 +1,27 @@
+﻿.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  margin-bottom: 10px;
+}
+
+.activity-icon {
+  font-size: 20px;
+  color: var(--primary-green);
+  min-width: 30px;
+  text-align: center;
+}
+
+.activity-title {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.activity-time {
+  color: var(--text-muted);
+  font-size: 11px;
+}

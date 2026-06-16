@@ -1,0 +1,6 @@
+﻿<div class="recent-activity">
+  <h3>Ostatnia aktywność</h3>
+  @for(item of activities; track item.id) {
+    <app-activity-item [activity]="item"></app-activity-item>
+  }
+</div>

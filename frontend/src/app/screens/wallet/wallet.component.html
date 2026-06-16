@@ -1,0 +1,15 @@
+﻿<h1>Portfel NFC</h1>
+<p class="subtitle">Zarządzaj cyfrowymi kartami</p>
+
+<div class="nfc-module">
+  <div class="nfc-header">💳 Moduł NFC</div>
+  <p class="nfc-status">Aktywny i bezpieczny</p>
+</div>
+
+<h3>Cyfrowe karty</h3>
+
+@for(card of paymentCards; track card.id) {
+  <app-payment-card [card]="card"></app-payment-card>
+}
+
+<button class="btn">+ Dodaj nową kartę</button>

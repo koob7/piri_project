@@ -1,0 +1,29 @@
+<div class="settings-container">
+  <h1>Ustawienia</h1>
+
+  <div class="setting-item">
+    <h3>Profil użytkownika</h3>
+    <p class="setting-value">John Doe</p>
+  </div>
+
+  <div class="setting-item">
+    <h3>Email</h3>
+    <p class="setting-value">{{ userEmail }}</p>
+  </div>
+
+  <div class="setting-item">
+    <h3>Weryfikacja</h3>
+    <p class="setting-value">Zweryfikowany</p>
+  </div>
+
+  <div class="form-group">
+    <label for="language">Język</label>
+    <select id="language">
+      <option selected>Polski</option>
+      <option>English</option>
+      <option>Deutsch</option>
+    </select>
+  </div>
+
+  <button class="btn" (click)="logout()">Wyloguj się</button>
+</div>

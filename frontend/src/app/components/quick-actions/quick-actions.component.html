@@ -1,0 +1,11 @@
+﻿<div class="quick-actions">
+  <h3>Szybkie akcje</h3>
+  <div class="actions-list">
+    @for(action of actions; track action.id) {
+      <button class="action-btn" (click)="onAction(action)">
+        <div class="action-icon">{{ action.icon }}</div>
+        <div>{{ action.label }}</div>
+      </button>
+    }
+  </div>
+</div>

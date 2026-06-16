@@ -1,0 +1,20 @@
+﻿<h1>Menedżer Tożsamości</h1>
+
+<div class="tabs">
+  <button class="tab" [class.active]="currentTab === 'main'" (click)="switchTab('main')">
+    🛡️ Tożsamość główna
+  </button>
+  <button class="tab" [class.active]="currentTab === 'temp'" (click)="switchTab('temp')">
+    👻 Tożsamości tymczasowe
+  </button>
+</div>
+
+@if(currentTab === 'main' && mainIdentity) {
+  <app-identity-card [identity]="mainIdentity"></app-identity-card>
+}
+
+@if(currentTab === 'temp' && tempIdentity) {
+  <app-identity-card [identity]="tempIdentity"></app-identity-card>
+}
+
+<button class="btn">+ Dodaj nową tożsamość</button>
